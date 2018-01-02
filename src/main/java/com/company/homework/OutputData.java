@@ -18,21 +18,6 @@ public class OutputData {
         System.out.println(checkUser(list));
     }
 
-    private static List<User> deserialize(String filename) throws IOException, ClassNotFoundException {
-        List<User> list;
-        File f = new File(filename);
-        if (f.exists()) {
-            FileInputStream fis = new FileInputStream(filename);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            list = (List<User>) ois.readObject();
-            ois.close();
-            fis.close();
-        } else {
-            list = null;
-        }
-        return list;
-    }
-
     private static String checkUser(List<User> list) throws IOException, IllegalAccessException {
         if (list != null) {
             User uTest = new User();
@@ -42,8 +27,8 @@ public class OutputData {
             Field[] allFields = c.getDeclaredFields();
             for (int i = 2; i < 4; i++) {
                 boolean f = true;
-                String str = "";
-                String err = "";
+                String str;
+                String err;
                 while (f) {
 
                     System.out.println("Input " + Validator.getFieldName(allFields[i])[0] + ". " + Validator.getFieldName(allFields[i])[1] + "\nor type Exit to exit:");
